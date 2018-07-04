@@ -34,6 +34,7 @@ namespace ProblemThree
             outputs.Add(message);
         }
 
+
         public string Start(string input)
         {
             var messages = input.Split(new[] { '\r', '\n' });

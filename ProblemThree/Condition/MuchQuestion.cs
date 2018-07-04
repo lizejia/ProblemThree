@@ -31,8 +31,9 @@ namespace ProblemThree
                 {
                     var total = sm.CalculatePrice();
                     _messagemain.AddOutputs($"{metals} is {total}");
+                    return true;
                 }
-                return true;
+                return false;
             }
             return false;
         }

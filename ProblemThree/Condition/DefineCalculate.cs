@@ -40,8 +40,9 @@ namespace ProblemThree
                     var total = sm.CalculatePrice();
                     var price = decimal.Parse(reg.Groups[2].Value) / total;
                     _messagemain.GoodsNameSymbol.Add(calculateGoods, new SymbolValue() { Symbol = ' ', Value = price });
+                    return true;
                 }
-                return true;
+                return false;
             }
             return false;
         }

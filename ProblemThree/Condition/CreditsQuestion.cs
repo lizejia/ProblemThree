@@ -31,10 +31,11 @@ namespace ProblemThree
                 {
                     var total = sm.CalculatePrice();
                     _messagemain.AddOutputs($"{metals} is {total.ToString("#.##")} Credits");
+                    return true;
                 }
-                return true;
+                return false;
             }
-            return false;       
+            return false;
         }
     }
 }

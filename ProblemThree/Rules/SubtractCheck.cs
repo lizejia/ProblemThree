@@ -8,32 +8,22 @@ namespace ProblemThree
 {
     public class SubtractCheck : IRule
     {
-        protected readonly List<string> subtract = new List<string> { "IV", "IX", "XL", "XC", "CD", "CM" };
-        protected readonly List<SymbolValue> SymbolValues;
-        private readonly Calculate _symbolMain;
+        private readonly List<string> _subtract = new List<string> { "IV", "IX", "XL", "XC", "CD", "CM" };
+        private readonly List<SymbolValue> _checkSymbol;
+        private readonly Calculate _calculate;
         
-        public SubtractCheck(Calculate symbolMain)
+        public SubtractCheck(List<SymbolValue> checkSymbol)
         {
-            this._symbolMain = symbolMain;
-            SymbolValues = new List<SymbolValue>();
-            Init();
-        }
-        private void Init()
-        {
-            foreach (var item in _symbolMain.Symbol)
-            {
-                var provStr = item.ToString().Trim();
-                SymbolValues.Add(new SymbolValue() { Symbol = item, Value = (decimal)Transform.ToRomanNumeral(provStr) });
-            }
+            _checkSymbol = checkSymbol;
         }
         public bool Check()
         {
-            for (int i = 0; i < SymbolValues.Count - 1; i++)
+            for (int i = 0; i < _checkSymbol.Count - 1; i++)
             {
-                if (SymbolValues[i].Value < SymbolValues[i + 1].Value)
+                if (_checkSymbol[i].Value < _checkSymbol[i + 1].Value)
                 {
-                    string symbolSubtractStr = SymbolValues[i].Symbol.ToString() + SymbolValues[i + 1].Symbol.ToString();
-                    if (!subtract.Any(a => a == symbolSubtractStr))
+                    string symbolSubtractStr = _checkSymbol[i].Symbol.ToString() + _checkSymbol[i + 1].Symbol.ToString();
+                    if (!_subtract.Any(a => a == symbolSubtractStr))
                     {
                         return false;
                     }

@@ -11,25 +11,26 @@ namespace ProblemThree
         private readonly List<char> neverRepeat = new List<char> { 'D', 'L', 'V' };
         private readonly List<char> repeat = new List<char> { 'I', 'X', 'C', 'M' };
 
-        private readonly Calculate _symbolMain;
-        public RepeatCheck(Calculate symbolMain)
+        private readonly Calculate _calculate;
+
+        public RepeatCheck(Calculate calculate)
         {
-            this._symbolMain = symbolMain;
+            this._calculate = calculate;
         }        
 
         public bool Check()
         {
             int y = 0;
-            char prov = _symbolMain.Symbol.ElementAt(0);
-            for (int i = 1; i < _symbolMain.Symbol.Count; i++)
+            char prov = _calculate.SymbolList.ElementAt(0);
+            for (int i = 1; i < _calculate.SymbolList.Count; i++)
             {
-                if (prov == _symbolMain.Symbol.ElementAt(i) && neverRepeat.Any(c => c == prov))
+                if (prov == _calculate.SymbolList.ElementAt(i) && neverRepeat.Any(c => c == prov))
                     return false;
-                if (prov == _symbolMain.Symbol.ElementAt(i) && repeat.Any(c => c == prov))
+                if (prov == _calculate.SymbolList.ElementAt(i) && repeat.Any(c => c == prov))
                     y++;
                 if (y >= 3)
                     return false;
-                prov = _symbolMain.Symbol.ElementAt(i);
+                prov = _calculate.SymbolList.ElementAt(i);
             }
 
             return true;

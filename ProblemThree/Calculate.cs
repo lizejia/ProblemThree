@@ -8,23 +8,46 @@ namespace ProblemThree
 {
     public class Calculate
     {
-        private List<char> _symbol;
-        private List<SymbolValue> _symbolValues;
+        private List<char> _symbolList;
+        private List<SymbolValue> _calculateSymbols;
         private List<IRule> _irule;
+        private readonly List<SymbolValue> _checkSymbol;
+
+        public List<char> SymbolList
+        {
+            get { return _symbolList; }
+            set { _symbolList = value; }
+        }
 
         public Calculate(List<SymbolValue> symbolValues)
         {
-            this._symbolValues = symbolValues;
-            this._symbol = symbolValues.Select(s => s.Symbol).ToList();
+            this._calculateSymbols = symbolValues;
+            this._symbolList = symbolValues.Select(s => s.Symbol).ToList();
+            Init();
             _irule = new List<IRule> {
                                         new RepeatCheck(this),
-                                        new SubtractCheck(this)
+                                        new SubtractCheck(this._checkSymbol)
                                      };
         }
-        public List<char> Symbol
+
+        public Calculate(string symbolsStr)
         {
-            get { return _symbol; }
-            set { _symbol = value; }
+            this._symbolList = symbolsStr.ToList();
+            Init();
+            this._calculateSymbols = this._checkSymbol;
+            _irule = new List<IRule> {
+                                        new RepeatCheck(this),
+                                        new SubtractCheck(this._checkSymbol)
+                                     };
+        }       
+
+        private void Init()
+        {
+            foreach (var item in this._symbolList)
+            {
+                var provStr = item.ToString().Trim();
+                this._calculateSymbols.Add(new SymbolValue() { Symbol = item, Value = (decimal)Transform.ToRomanNumeral(provStr) });
+            }
         }
 
 
@@ -36,23 +59,23 @@ namespace ProblemThree
         public decimal CalculatePrice()
         {
             decimal total = 0M;
-            for (int i = 0; i < _symbolValues.Count; i++)
+            for (int i = 0; i < _calculateSymbols.Count; i++)
             {
                 int nextIndex = i + 1;
-                if (nextIndex < _symbolValues.Count && _symbolValues[i].Value < _symbolValues[nextIndex].Value)
+                if (nextIndex < _calculateSymbols.Count && _calculateSymbols[i].Value < _calculateSymbols[nextIndex].Value)
                 {
-                    total += _symbolValues[i + 1].Value - _symbolValues[i].Value;
+                    total += _calculateSymbols[i + 1].Value - _calculateSymbols[i].Value;
                     i++;
                 }
                 else
                 {
-                    if (_symbolValues[i].Symbol != ' ')
+                    if (_calculateSymbols[i].Symbol != ' ')
                     {
-                        total += _symbolValues[i].Value;
+                        total += _calculateSymbols[i].Value;
                     }
                     else
                     {
-                        total = total * _symbolValues[i].Value;
+                        total = total * _calculateSymbols[i].Value;
                     }
                 }
             }

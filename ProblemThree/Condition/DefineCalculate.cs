@@ -34,10 +34,10 @@ namespace ProblemThree
                         calculateGoods = metalCollection[i].Value;
                     }                    
                 }
-                CalculateMain sm = new CalculateMain(symbolValues);
+                Calculate sm = new Calculate(symbolValues);
                 if (sm.Check())
                 {
-                    var total = sm.Calculate();
+                    var total = sm.CalculatePrice();
                     var price = decimal.Parse(reg.Groups[2].Value) / total;
                     _messagemain.GoodsNameSymbol.Add(calculateGoods, new SymbolValue() { Symbol = ' ', Value = price });
                 }

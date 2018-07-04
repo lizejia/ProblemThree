@@ -26,10 +26,10 @@ namespace ProblemThree
                 {
                     symbolValues.Add(_messagemain.GoodsNameSymbol[metalCollection[i].Value]);
                 }
-                CalculateMain sm = new CalculateMain(symbolValues);
+                Calculate sm = new Calculate(symbolValues);
                 if (sm.Check())
                 {
-                    var total = sm.Calculate();
+                    var total = sm.CalculatePrice();
                     _messagemain.AddOutputs($"{metals} is {total}");
                 }
                 return true;

@@ -11,8 +11,8 @@ namespace ProblemThree
         private readonly List<char> neverRepeat = new List<char> { 'D', 'L', 'V' };
         private readonly List<char> repeat = new List<char> { 'I', 'X', 'C', 'M' };
 
-        private readonly CalculateMain _symbolMain;
-        public RepeatCheck(CalculateMain symbolMain)
+        private readonly Calculate _symbolMain;
+        public RepeatCheck(Calculate symbolMain)
         {
             this._symbolMain = symbolMain;
         }        

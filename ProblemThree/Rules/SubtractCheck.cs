@@ -10,9 +10,9 @@ namespace ProblemThree
     {
         protected readonly List<string> subtract = new List<string> { "IV", "IX", "XL", "XC", "CD", "CM" };
         protected readonly List<SymbolValue> SymbolValues;
-        private readonly CalculateMain _symbolMain;
+        private readonly Calculate _symbolMain;
         
-        public SubtractCheck(CalculateMain symbolMain)
+        public SubtractCheck(Calculate symbolMain)
         {
             this._symbolMain = symbolMain;
             SymbolValues = new List<SymbolValue>();

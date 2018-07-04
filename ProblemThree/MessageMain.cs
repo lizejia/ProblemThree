@@ -34,10 +34,10 @@ namespace ProblemThree
             outputs.Add(message);
         }
 
-        public void GetGoodsSymbol(string input)
+        public string Start(string input)
         {
-            var lines = input.Split(new[] { '\r', '\n' });
-            foreach (var message in lines)
+            var messages = input.Split(new[] { '\r', '\n' });
+            foreach (var message in messages)
             {
                 if (string.IsNullOrEmpty(message))
                 {
@@ -47,8 +47,8 @@ namespace ProblemThree
                 {
                     outputs.Add("I have no idea what you are talking about");
                 }
-
-            }            
+            }
+            return string.Join("\r\n", outputs);
         }
     }
 }

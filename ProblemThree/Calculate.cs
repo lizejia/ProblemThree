@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProblemThree
 {
-    public class CalculateMain
+    public class Calculate
     {
         private List<char> _symbol;
         private List<SymbolValue> _symbolValues;
         private List<IRule> _irule;
 
-        public CalculateMain(List<SymbolValue> symbolValues)
+        public Calculate(List<SymbolValue> symbolValues)
         {
             this._symbolValues = symbolValues;
             this._symbol = symbolValues.Select(s => s.Symbol).ToList();
@@ -33,7 +33,7 @@ namespace ProblemThree
             return !_irule.Exists(f => !f.Check());
         }
 
-        public decimal Calculate()
+        public decimal CalculatePrice()
         {
             decimal total = 0M;
             for (int i = 0; i < _symbolValues.Count; i++)

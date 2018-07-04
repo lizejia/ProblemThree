@@ -42,8 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculateMain.cs" />
+    <Compile Include="Condition\CreditsQuestion.cs" />
+    <Compile Include="Condition\DefineCalculate.cs" />
+    <Compile Include="Condition\DefineFirst.cs" />
+    <Compile Include="Condition\ICondition.cs" />
+    <Compile Include="Condition\MuchQuestion.cs" />
+    <Compile Include="MessageMain.cs" />
+    <Compile Include="Model\RomanNumerals.cs" />
+    <Compile Include="Model\SymbolValue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\IRule.cs" />
+    <Compile Include="Rules\RepeatCheck.cs" />
+    <Compile Include="Rules\SubtractCheck.cs" />
+    <Compile Include="Tool\Transform.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

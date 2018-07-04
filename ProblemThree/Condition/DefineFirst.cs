@@ -25,7 +25,7 @@ namespace ProblemThree
                 _messagemain.GoodsNameSymbol.Add(reg.Groups[1].Value, new SymbolValue
                                                         {
                                                             Symbol = Convert.ToChar(symbol),
-                                                            Value = (decimal)Transform.ToRomanNumeral(symbol)
+                                                            Value = (decimal)Tool.ToRomanNumeral(symbol)
                                                         });
                 return true;
             }

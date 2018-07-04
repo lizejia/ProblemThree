@@ -56,7 +56,7 @@
     <Compile Include="Rules\IRule.cs" />
     <Compile Include="Rules\RepeatCheck.cs" />
     <Compile Include="Rules\SubtractCheck.cs" />
-    <Compile Include="Tool\Transform.cs" />
+    <Compile Include="Tool\Tool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

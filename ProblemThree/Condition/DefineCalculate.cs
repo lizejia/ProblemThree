@@ -25,7 +25,6 @@ namespace ProblemThree
                 string calculateGoods = "";
                 for (int i = 0; i < metalCollection.Count; i++)
                 {
-                    //找出已有定义的货物
                     if (_messagemain.GoodsNameSymbol.Any(a => a.Key == metalCollection[i].Value))
                     {
                         symbolValues.Add(_messagemain.GoodsNameSymbol[metalCollection[i].Value]);

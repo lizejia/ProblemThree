@@ -12,41 +12,18 @@ namespace ProblemThree
         private readonly List<IRule> _irule;
         private readonly List<SymbolValue> _checkSymbol;
         private readonly List<char> _symbolList;
-
-        public Calculate(string symbolsStr)
-        {
-            _symbolList = symbolsStr.ToList();
-            this._checkSymbol = new List<SymbolValue>();
-            Init();
-            this._irule = new List<IRule> {
-                                        new RepeatCheck(this._symbolList),
-                                        new SubtractCheck(this._checkSymbol)
-                                     };
-            this._calculateSymbols = this._checkSymbol;
-        }
-
+        
         public Calculate(List<SymbolValue> symbolValues)
         {
             _symbolList = symbolValues.Select(s => s.Symbol).ToList();
-            this._checkSymbol = new List<SymbolValue>();
-            Init();
+            this._checkSymbol = Tool.MapToSymbolValue(_symbolList);
             this._irule = new List<IRule> {
                                         new RepeatCheck(this._symbolList),
                                         new SubtractCheck(this._checkSymbol)
                                      };
             this._calculateSymbols = symbolValues;
         }
-
-        private void Init()
-        {
-            foreach (var item in this._symbolList)
-            {
-                var provStr = item.ToString().Trim();
-                this._checkSymbol.Add(new SymbolValue() { Symbol = item, Value = (decimal)Transform.ToRomanNumeral(provStr) });
-            }
-        }
-
-
+        
         public bool Check()
         {            
             return !_irule.Exists(f => !f.Check());

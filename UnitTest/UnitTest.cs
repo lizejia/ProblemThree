@@ -10,7 +10,7 @@ namespace UnitTest
         [TestMethod]
         public void TestCheckTrue()
         {
-            Calculate calculate = new Calculate("MCMIII");
+            Calculate calculate = new Calculate(Tool.MapToSymbolValue("MCMIII"));
             var output = calculate.Check();
             Assert.AreEqual(true, output);
         }
@@ -18,7 +18,7 @@ namespace UnitTest
         [TestMethod]
         public void TestCheckFalse()
         {
-            Calculate calculate = new Calculate("MCMXLIVV");
+            Calculate calculate = new Calculate(Tool.MapToSymbolValue("MCMXLIVV"));
             var output = calculate.Check();
             Assert.AreEqual(false, output);
         }

@@ -10,7 +10,6 @@ namespace ProblemThree
     {
         private readonly List<string> _subtract = new List<string> { "IV", "IX", "XL", "XC", "CD", "CM" };
         private readonly List<SymbolValue> _checkSymbol;
-        private readonly Calculate _calculate;
         
         public SubtractCheck(List<SymbolValue> checkSymbol)
         {

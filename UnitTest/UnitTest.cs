@@ -8,6 +8,24 @@ namespace UnitTest
     public class UnitTest
     {
         [TestMethod]
+        public void TestCheckTrue()
+        {
+            Calculate calculate = new Calculate("MCMIII");
+            var output = calculate.Check();
+            Assert.AreEqual(true, output);
+        }
+
+        [TestMethod]
+        public void TestCheckFalse()
+        {
+            Calculate calculate = new Calculate("MCMXLIVV");
+            var output = calculate.Check();
+            Assert.AreEqual(false, output);
+        }
+
+
+
+        [TestMethod]
         public void Testglob()
         {
             string input = @"glob is I

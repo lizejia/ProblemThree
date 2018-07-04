@@ -8,45 +8,41 @@ namespace ProblemThree
 {
     public class Calculate
     {
-        private List<char> _symbolList;
-        private List<SymbolValue> _calculateSymbols;
-        private List<IRule> _irule;
+        private readonly List<SymbolValue> _calculateSymbols;
+        private readonly List<IRule> _irule;
         private readonly List<SymbolValue> _checkSymbol;
+        private readonly List<char> _symbolList;
 
-        public List<char> SymbolList
+        public Calculate(string symbolsStr)
         {
-            get { return _symbolList; }
-            set { _symbolList = value; }
+            _symbolList = symbolsStr.ToList();
+            this._checkSymbol = new List<SymbolValue>();
+            Init();
+            this._irule = new List<IRule> {
+                                        new RepeatCheck(this._symbolList),
+                                        new SubtractCheck(this._checkSymbol)
+                                     };
+            this._calculateSymbols = this._checkSymbol;
         }
 
         public Calculate(List<SymbolValue> symbolValues)
         {
+            _symbolList = symbolValues.Select(s => s.Symbol).ToList();
+            this._checkSymbol = new List<SymbolValue>();
+            Init();
+            this._irule = new List<IRule> {
+                                        new RepeatCheck(this._symbolList),
+                                        new SubtractCheck(this._checkSymbol)
+                                     };
             this._calculateSymbols = symbolValues;
-            this._symbolList = symbolValues.Select(s => s.Symbol).ToList();
-            Init();
-            _irule = new List<IRule> {
-                                        new RepeatCheck(this),
-                                        new SubtractCheck(this._checkSymbol)
-                                     };
         }
-
-        public Calculate(string symbolsStr)
-        {
-            this._symbolList = symbolsStr.ToList();
-            Init();
-            this._calculateSymbols = this._checkSymbol;
-            _irule = new List<IRule> {
-                                        new RepeatCheck(this),
-                                        new SubtractCheck(this._checkSymbol)
-                                     };
-        }       
 
         private void Init()
         {
             foreach (var item in this._symbolList)
             {
                 var provStr = item.ToString().Trim();
-                this._calculateSymbols.Add(new SymbolValue() { Symbol = item, Value = (decimal)Transform.ToRomanNumeral(provStr) });
+                this._checkSymbol.Add(new SymbolValue() { Symbol = item, Value = (decimal)Transform.ToRomanNumeral(provStr) });
             }
         }
 

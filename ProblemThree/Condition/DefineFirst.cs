@@ -21,6 +21,7 @@ namespace ProblemThree
             if (reg.Success)
             {
                 string symbol = reg.Groups[2].Value;
+                //添加直接定义值
                 _messagemain.GoodsNameSymbol.Add(reg.Groups[1].Value, new SymbolValue
                                                         {
                                                             Symbol = Convert.ToChar(symbol),

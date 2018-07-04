@@ -8,18 +8,13 @@ namespace ProblemThree
 {
     public class MessageMain
     {
-        private Dictionary<string, SymbolValue> _goodsnamesymbol;
-        public Dictionary<string, SymbolValue> GoodsNameSymbol
-        {
-            get { return _goodsnamesymbol; }
-            set { _goodsnamesymbol = value; }
-        }
+        public Dictionary<string, SymbolValue> GoodsNameSymbol { get; set; }
 
         private readonly List<ICondition> _icondition;
         private readonly List<string> outputs;
         public MessageMain()
         {
-            _goodsnamesymbol = new Dictionary<string, SymbolValue>();
+            GoodsNameSymbol = new Dictionary<string, SymbolValue>();
             _icondition = new List<ICondition> {
                                         new DefineFirst(this),
                                         new DefineCalculate(this),

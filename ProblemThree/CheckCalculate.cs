@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ProblemThree
 {
-    public class Calculate
+    public class CheckCalculate
     {
         private readonly List<SymbolValue> _calculateSymbols;
         private readonly List<IRule> _irule;
         private readonly List<SymbolValue> _checkSymbol;
         private readonly List<char> _symbolList;
         
-        public Calculate(List<SymbolValue> symbolValues)
+        public CheckCalculate(List<SymbolValue> symbolValues)
         {
             _symbolList = symbolValues.Select(s => s.Symbol).ToList();
             this._checkSymbol = Tool.MapToSymbolValue(_symbolList);
@@ -42,7 +42,7 @@ namespace ProblemThree
                 }
                 else
                 {
-                    if (_calculateSymbols[i].Symbol != ' ')
+                    if (_calculateSymbols[i].Symbol != 'U')
                     {
                         total += _calculateSymbols[i].Value;
                     }

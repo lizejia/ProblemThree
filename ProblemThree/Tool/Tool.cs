@@ -20,7 +20,7 @@ namespace ProblemThree
             var symbolValues = new List<SymbolValue>();
             foreach (var item in symbolStr.ToList())
             {
-                var provStr = item.ToString().Trim();
+                var provStr = item.ToString();
                 symbolValues.Add(new SymbolValue() { Symbol = item, Value = (decimal)ToRomanNumeral(provStr) });
             }
             return symbolValues;
@@ -31,7 +31,7 @@ namespace ProblemThree
             var symbolValues = new List<SymbolValue>();
             foreach (var item in symbols)
             {
-                var provStr = item.ToString().Trim();
+                var provStr = item.ToString();
                 symbolValues.Add(new SymbolValue() { Symbol = item, Value = (decimal)ToRomanNumeral(provStr) });
             }
             return symbolValues;

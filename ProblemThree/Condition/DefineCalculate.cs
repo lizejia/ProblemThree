@@ -14,7 +14,7 @@ namespace ProblemThree
         {
             this._messagemain = messageMain;
         }
-        public bool GetGoodsSymbol(string message)
+        public bool GetSymbolValuesByMessage(string message)
         {
             var reg = Regex.Match(message, @"([\w+\s]+) is (\d+) Credits");            
             if (reg.Success)
@@ -34,12 +34,12 @@ namespace ProblemThree
                         calculateGoods = metalCollection[i].Value;
                     }                    
                 }
-                Calculate sm = new Calculate(symbolValues);
+                CheckCalculate sm = new CheckCalculate(symbolValues);
                 if (sm.Check())
                 {
                     var total = sm.CalculatePrice();
                     var price = decimal.Parse(reg.Groups[2].Value) / total;
-                    _messagemain.GoodsNameSymbol.Add(calculateGoods, new SymbolValue() { Symbol = ' ', Value = price });
+                    _messagemain.GoodsNameSymbol.Add(calculateGoods, new SymbolValue() { Symbol = 'U', Value = price });//U代表未知
                     return true;
                 }
                 return false;

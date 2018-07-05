@@ -15,7 +15,7 @@ namespace ProblemThree
             this._messagemain = messageMain;
         }        
 
-        public bool GetGoodsSymbol(string message)
+        public bool GetSymbolValuesByMessage(string message)
         {
             var reg = Regex.Match(message, @"(^\w+) is ([IVXLCDM])$");
             if (reg.Success)

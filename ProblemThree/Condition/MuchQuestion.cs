@@ -14,7 +14,7 @@ namespace ProblemThree
         {
             this._messagemain = messagemain;
         }
-        public bool GetGoodsSymbol(string message)
+        public bool GetSymbolValuesByMessage(string message)
         {
             var reg = Regex.Match(message, @"^how much is ([\w+\s]+) [\\?]$");
             if (reg.Success)
@@ -26,7 +26,7 @@ namespace ProblemThree
                 {
                     symbolValues.Add(_messagemain.GoodsNameSymbol[metalCollection[i].Value]);
                 }
-                Calculate sm = new Calculate(symbolValues);
+                CheckCalculate sm = new CheckCalculate(symbolValues);
                 if (sm.Check())
                 {
                     var total = sm.CalculatePrice();

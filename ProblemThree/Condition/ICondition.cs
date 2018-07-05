@@ -8,6 +8,6 @@ namespace ProblemThree
 {
     interface ICondition
     {
-        bool GetGoodsSymbol(string message);
+        bool GetSymbolValuesByMessage(string message);
     }
 }

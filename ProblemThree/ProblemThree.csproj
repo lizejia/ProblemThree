@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calculate.cs" />
+    <Compile Include="CheckCalculate.cs" />
     <Compile Include="Condition\CreditsQuestion.cs" />
     <Compile Include="Condition\DefineCalculate.cs" />
     <Compile Include="Condition\DefineFirst.cs" />

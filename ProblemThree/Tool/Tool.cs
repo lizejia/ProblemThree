@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,18 @@ namespace ProblemThree
                 symbolValues.Add(new SymbolValue() { Symbol = item, Value = (decimal)ToRomanNumeral(provStr) });
             }
             return symbolValues;
+        }
+
+        public static string ReadTxtContent(string path)
+        {
+            path = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + path;
+            using (FileStream fileStream = new FileStream(path, FileMode.Open))
+            {
+                StreamReader streamReader = new StreamReader(fileStream);
+                string result = streamReader.ReadToEnd();
+                streamReader.Close();
+                return result;
+            }
         }
     }
 }

@@ -9,13 +9,12 @@ namespace ProblemThree
     public class MessageMain
     {
         public Dictionary<string, SymbolValue> GoodsNameSymbol { get; set; }
-        public CheckCalculate checkCalculate;
-        private readonly List<ICondition> _icondition;
+        private readonly List<ICondition> conditions;
         private readonly List<string> outputs;
         public MessageMain()
         {
             GoodsNameSymbol = new Dictionary<string, SymbolValue>();
-            _icondition = new List<ICondition> {
+            conditions = new List<ICondition> {
                                         new DefineFirst(this),
                                         new DefineCalculate(this),
                                         new MuchQuestion(this),
@@ -39,7 +38,7 @@ namespace ProblemThree
                 {
                     continue;
                 }
-                if (!_icondition.Exists(e => e.GetSymbolValuesByMessage(message)))
+                if (!conditions.Exists(e => e.GetSymbolValuesByMessage(message)))
                 {
                     outputs.Add("I have no idea what you are talking about");
                 }

@@ -8,21 +8,21 @@ namespace ProblemThree
 {
     public class SubtractCheck : IRule
     {
-        private readonly List<string> _subtract = new List<string> { "IV", "IX", "XL", "XC", "CD", "CM" };
-        private readonly List<SymbolValue> _checkSymbol;
+        private readonly List<string> _subtractList = new List<string> { "IV", "IX", "XL", "XC", "CD", "CM" };
+        private readonly List<SymbolValue> _checkSymbolList;
         
-        public SubtractCheck(List<SymbolValue> checkSymbol)
+        public SubtractCheck(List<SymbolValue> checkSymbolList)
         {
-            _checkSymbol = checkSymbol;
+            _checkSymbolList = checkSymbolList;
         }
         public bool Check()
         {
-            for (int i = 0; i < _checkSymbol.Count - 1; i++)
+            for (int i = 0; i < _checkSymbolList.Count - 1; i++)
             {
-                if (_checkSymbol[i].Value < _checkSymbol[i + 1].Value)
+                if (_checkSymbolList[i].Value < _checkSymbolList[i + 1].Value)
                 {
-                    string symbolSubtractStr = _checkSymbol[i].Symbol.ToString() + _checkSymbol[i + 1].Symbol.ToString();
-                    if (!_subtract.Any(a => a == symbolSubtractStr))
+                    string symbolSubtractStr = _checkSymbolList[i].Symbol.ToString() + _checkSymbolList[i + 1].Symbol.ToString();
+                    if (!_subtractList.Any(a => a == symbolSubtractStr))
                     {
                         return false;
                     }

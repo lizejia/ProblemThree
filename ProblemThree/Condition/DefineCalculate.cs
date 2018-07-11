@@ -9,10 +9,10 @@ namespace ProblemThree
 {
     public class DefineCalculate : ICondition
     {
-        private readonly MessageMain _messagemain;
+        private readonly MessageMain _messageMain;
         public DefineCalculate(MessageMain messageMain)
         {
-            this._messagemain = messageMain;
+            this._messageMain = messageMain;
         }
         public bool GetSymbolValuesByMessage(string message)
         {
@@ -25,9 +25,9 @@ namespace ProblemThree
                 string calculateGoods = "";
                 for (int i = 0; i < metalCollection.Count; i++)
                 {
-                    if (_messagemain.GoodsNameSymbol.Any(a => a.Key == metalCollection[i].Value))
+                    if (_messageMain.GoodsNameSymbol.Any(a => a.Key == metalCollection[i].Value))
                     {
-                        symbolValues.Add(_messagemain.GoodsNameSymbol[metalCollection[i].Value]);
+                        symbolValues.Add(_messageMain.GoodsNameSymbol[metalCollection[i].Value]);
                     }
                     else
                     {
@@ -39,7 +39,7 @@ namespace ProblemThree
                 {
                     var total = sm.CalculatePrice();
                     var price = decimal.Parse(reg.Groups[2].Value) / total;
-                    _messagemain.GoodsNameSymbol.Add(calculateGoods, new SymbolValue() { Symbol = 'U', Value = price });//U代表未知
+                    _messageMain.GoodsNameSymbol.Add(calculateGoods, new SymbolValue() { Symbol = 'U', Value = price });//U代表未知
                     return true;
                 }
                 return false;

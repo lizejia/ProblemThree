@@ -9,23 +9,23 @@ namespace ProblemThree
     public class MessageMain
     {
         public Dictionary<string, SymbolValue> GoodsNameSymbol { get; set; }
-        private readonly List<ICondition> conditions;
-        private readonly List<string> outputs;
+        private readonly List<ICondition> _iconditionList;
+        private readonly List<string> _outputList;
         public MessageMain()
         {
             GoodsNameSymbol = new Dictionary<string, SymbolValue>();
-            conditions = new List<ICondition> {
+            _iconditionList = new List<ICondition> {
                                         new DefineFirst(this),
                                         new DefineCalculate(this),
                                         new MuchQuestion(this),
                                         new CreditsQuestion(this)
                                      };
-            outputs = new List<string>();
+            _outputList = new List<string>();
         }
 
         public void AddOutputs(string message)
         {
-            outputs.Add(message);
+            _outputList.Add(message);
         }
 
 
@@ -38,12 +38,12 @@ namespace ProblemThree
                 {
                     continue;
                 }
-                if (!conditions.Exists(e => e.GetSymbolValuesByMessage(message)))
+                if (!_iconditionList.Exists(e => e.GetSymbolValuesByMessage(message)))
                 {
-                    outputs.Add("I have no idea what you are talking about");
+                    _outputList.Add("I have no idea what you are talking about");
                 }
             }
-            return string.Join("\r\n", outputs);
+            return string.Join("\r\n", _outputList);
         }
     }
 }

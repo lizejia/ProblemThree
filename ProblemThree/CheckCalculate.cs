@@ -8,47 +8,47 @@ namespace ProblemThree
 {
     public class CheckCalculate
     {
-        private readonly List<SymbolValue> _calculateSymbols;
-        private readonly List<IRule> _irule;
-        private readonly List<SymbolValue> _checkSymbol;
+        private readonly List<SymbolValue> _calculateSymbolList;
+        private readonly List<IRule> _iruleList;
+        private readonly List<SymbolValue> _checkSymbolList;
         private readonly List<char> _symbolList;
         
-        public CheckCalculate(List<SymbolValue> symbolValues)
+        public CheckCalculate(List<SymbolValue> symbolValueList)
         {
-            _symbolList = symbolValues.Select(s => s.Symbol).ToList();
-            this._checkSymbol = Tool.MapToSymbolValue(_symbolList);
-            this._irule = new List<IRule> {
+            _symbolList = symbolValueList.Select(s => s.Symbol).ToList();
+            this._checkSymbolList = Tool.MapToSymbolValue(_symbolList);
+            this._iruleList = new List<IRule> {
                                         new RepeatCheck(this._symbolList),
-                                        new SubtractCheck(this._checkSymbol)
+                                        new SubtractCheck(this._checkSymbolList)
                                      };
-            this._calculateSymbols = symbolValues;
+            this._calculateSymbolList = symbolValueList;
         }
         
         public bool Check()
         {            
-            return !_irule.Exists(f => !f.Check());
+            return !_iruleList.Exists(f => !f.Check());
         }
 
         public decimal CalculatePrice()
         {
             decimal total = 0M;
-            for (int i = 0; i < _calculateSymbols.Count; i++)
+            for (int i = 0; i < _calculateSymbolList.Count; i++)
             {
                 int nextIndex = i + 1;
-                if (nextIndex < _calculateSymbols.Count && _calculateSymbols[i].Value < _calculateSymbols[nextIndex].Value)
+                if (nextIndex < _calculateSymbolList.Count && _calculateSymbolList[i].Value < _calculateSymbolList[nextIndex].Value)
                 {
-                    total += _calculateSymbols[i + 1].Value - _calculateSymbols[i].Value;
+                    total += _calculateSymbolList[i + 1].Value - _calculateSymbolList[i].Value;
                     i++;
                 }
                 else
                 {
-                    if (_calculateSymbols[i].Symbol != 'U')
+                    if (_calculateSymbolList[i].Symbol != 'U')
                     {
-                        total += _calculateSymbols[i].Value;
+                        total += _calculateSymbolList[i].Value;
                     }
                     else
                     {
-                        total = total * _calculateSymbols[i].Value;
+                        total = total * _calculateSymbolList[i].Value;
                     }
                 }
             }

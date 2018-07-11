@@ -8,30 +8,29 @@ namespace ProblemThree
 {
     public class RepeatCheck : IRule
     {
-        private readonly List<char> neverRepeat = new List<char> { 'D', 'L', 'V' };
-        private readonly List<char> repeat = new List<char> { 'I', 'X', 'C', 'M' };
-        private readonly List<char> _checkSymbol;
+        private readonly List<char> neverRepeatList = new List<char> { 'D', 'L', 'V' };
+        private readonly List<char> repeatList = new List<char> { 'I', 'X', 'C', 'M' };
+        private readonly List<char> _checkSymbolList;
 
-        public RepeatCheck(List<char> checkSymbol)
+        public RepeatCheck(List<char> checkSymbolList)
         {
-            this._checkSymbol = checkSymbol;
+            this._checkSymbolList = checkSymbolList;
         }        
 
         public bool Check()
         {
             int y = 0;
-            char prov = _checkSymbol.ElementAt(0);
-            for (int i = 1; i < _checkSymbol.Count; i++)
+            char current = _checkSymbolList.ElementAt(0);
+            for (int i = 1; i < _checkSymbolList.Count; i++)
             {
-                if (prov == _checkSymbol.ElementAt(i) && neverRepeat.Any(c => c == prov))
+                if (current == _checkSymbolList.ElementAt(i) && neverRepeatList.Any(c => c == current))
                     return false;
-                if (prov == _checkSymbol.ElementAt(i) && repeat.Any(c => c == prov))
+                if (current == _checkSymbolList.ElementAt(i) && repeatList.Any(c => c == current))
                     y++;
                 if (y >= 3)
                     return false;
-                prov = _checkSymbol.ElementAt(i);
+                current = _checkSymbolList.ElementAt(i);
             }
-
             return true;
         }
     }

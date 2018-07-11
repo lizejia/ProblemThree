@@ -49,5 +49,16 @@ namespace ProblemThree
                 return result;
             }
         }
+
+        public static void WirteOutput(string output)
+        {
+            string path = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "output.txt";
+            using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                StreamWriter streamWriter = new StreamWriter(fileStream);
+                streamWriter.WriteLineAsync(output);
+                streamWriter.Close();
+            }
+        }
     }
 }

@@ -9,10 +9,10 @@ namespace ProblemThree
 {
     public class CreditsQuestion : ICondition
     {
-        private readonly MessageMain _messagemain;
+        private readonly MessageMain _messageMain;
         public CreditsQuestion(MessageMain messagemain)
         {
-            this._messagemain = messagemain;
+            this._messageMain = messagemain;
         }
         public bool GetSymbolValuesByMessage(string message)
         {
@@ -24,13 +24,13 @@ namespace ProblemThree
                 List<SymbolValue> symbolValues = new List<SymbolValue>();
                 for (int i = 0; i < metalCollection.Count; i++)
                 {
-                    symbolValues.Add(_messagemain.GoodsNameSymbol[metalCollection[i].Value]);
+                    symbolValues.Add(_messageMain.GoodsNameSymbol[metalCollection[i].Value]);
                 }
                 CheckCalculate sm = new CheckCalculate(symbolValues);
                 if (sm.Check())
                 {
                     var total = sm.CalculatePrice();
-                    _messagemain.AddOutputs($"{metals} is {total.ToString("#.##")} Credits");
+                    _messageMain.AddOutputs($"{metals} is {total.ToString("#.##")} Credits");
                     return true;
                 }
                 return false;

@@ -8,26 +8,20 @@ namespace ProblemThree
 {
     public class MessageMain
     {
-        public Dictionary<string, SymbolValue> GoodsNameSymbol { get; set; }
+        public GoodsSymbolMapper _goodsNameSymbol;
         private readonly List<ICondition> _iconditionList;
         private readonly List<string> _outputList;
         public MessageMain()
         {
-            GoodsNameSymbol = new Dictionary<string, SymbolValue>();
-            _iconditionList = new List<ICondition> {
-                                        new DefineFirst(this),
-                                        new DefineCalculate(this),
-                                        new MuchQuestion(this),
-                                        new CreditsQuestion(this)
-                                     };
+            _goodsNameSymbol = new GoodsSymbolMapper();
             _outputList = new List<string>();
+            _iconditionList = new List<ICondition> {
+                                        new DefineFirst(_goodsNameSymbol),
+                                        new DefineCalculate(_goodsNameSymbol),
+                                        new MuchQuestion(_goodsNameSymbol,_outputList),
+                                        new CreditsQuestion(_goodsNameSymbol,_outputList)
+                                     };
         }
-
-        public void AddOutputs(string message)
-        {
-            _outputList.Add(message);
-        }
-
 
         public string Start(string input)
         {

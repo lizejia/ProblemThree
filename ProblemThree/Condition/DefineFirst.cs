@@ -9,10 +9,10 @@ namespace ProblemThree
 {
     public class DefineFirst : ICondition
     {
-        private readonly MessageMain _messageMain;
-        public DefineFirst(MessageMain messageMain)
+        private readonly GoodsSymbolMapper _goodsNameSymbol;
+        public DefineFirst(GoodsSymbolMapper goodsNameSymbol)
         {
-            this._messageMain = messageMain;
+            this._goodsNameSymbol = goodsNameSymbol;
         }        
 
         public bool GetSymbolValuesByMessage(string message)
@@ -22,11 +22,7 @@ namespace ProblemThree
             {
                 string symbol = reg.Groups[2].Value;
                 //添加直接定义值
-                _messageMain.GoodsNameSymbol.Add(reg.Groups[1].Value, new SymbolValue
-                                                        {
-                                                            Symbol = Convert.ToChar(symbol),
-                                                            Value = (decimal)Tool.ToRomanNumeral(symbol)
-                                                        });
+                _goodsNameSymbol.Add(reg.Groups[1].Value, symbol, (decimal)Tool.ToRomanNumeral(symbol));
                 return true;
             }
             return false;

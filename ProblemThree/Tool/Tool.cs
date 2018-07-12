@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -37,10 +38,9 @@ namespace ProblemThree
             }
             return symbolValues;
         }
-
-        public static string ReadTxtContent(string path)
+        public static string ReadTxtContent()
         {
-            path = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + path;
+            string path = ConfigurationManager.AppSettings["InputPath"];
             using (FileStream fileStream = new FileStream(path, FileMode.Open))
             {
                 StreamReader streamReader = new StreamReader(fileStream);
@@ -52,7 +52,7 @@ namespace ProblemThree
 
         public static void WirteOutput(string output)
         {
-            string path = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "output.txt";
+            string path = ConfigurationManager.AppSettings["OutputPath"];
             using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate))
             {
                 StreamWriter streamWriter = new StreamWriter(fileStream);

@@ -132,7 +132,7 @@ how much wood could a woodchuck chuck if a woodchuck could chuck wood ?";
         [TestMethod]
         public void TestAll()
         {
-            string input = Tool.ReadTxtContent("input.txt");
+            string input = Tool.ReadTxtContent();
             MessageMain messageMain = new MessageMain();
             var output = messageMain.Start(input);
             string answer = @"pish tegj glob glob is 42

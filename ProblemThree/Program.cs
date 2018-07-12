@@ -10,7 +10,7 @@ namespace ProblemThree
     {
         static void Main(string[] args)
         {
-            string input = Tool.ReadTxtContent("input.txt");
+            string input = Tool.ReadTxtContent();
             Console.WriteLine("Test input:");
             Console.WriteLine(input);
 

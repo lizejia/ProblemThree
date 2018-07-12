@@ -9,10 +9,12 @@ namespace ProblemThree
 {
     public class MuchQuestion : ICondition
     {
-        private readonly MessageMain _messageMain;
-        public MuchQuestion(MessageMain messagemain)
+        private readonly GoodsSymbolMapper _goodsNameSymbol;
+        private readonly List<string> _outputList;
+        public MuchQuestion(GoodsSymbolMapper goodsNameSymbol,List<string> outputList)
         {
-            this._messageMain = messagemain;
+            this._goodsNameSymbol = goodsNameSymbol;
+            this._outputList = outputList;
         }
         public bool GetSymbolValuesByMessage(string message)
         {
@@ -24,13 +26,13 @@ namespace ProblemThree
                 List<SymbolValue> symbolValues = new List<SymbolValue>();
                 for (int i = 0; i < metalCollection.Count; i++)
                 {
-                    symbolValues.Add(_messageMain.GoodsNameSymbol[metalCollection[i].Value]);
+                    symbolValues.Add(this._goodsNameSymbol.Get()[metalCollection[i].Value]);
                 }
                 CheckCalculate sm = new CheckCalculate(symbolValues);
                 if (sm.Check())
                 {
                     var total = sm.CalculatePrice();
-                    _messageMain.AddOutputs($"{metals} is {total}");
+                    this._outputList.Add($"{metals} is {total}");
                     return true;
                 }
                 return false;

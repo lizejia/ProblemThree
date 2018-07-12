@@ -22,7 +22,7 @@ namespace ProblemThree
             {
                 string symbol = reg.Groups[2].Value;
                 //添加直接定义值
-                _goodsNameSymbol.Add(reg.Groups[1].Value, symbol, (decimal)Tool.ToRomanNumeral(symbol));
+                _goodsNameSymbol.AddGoods(reg.Groups[1].Value, symbol, (decimal)Tool.ToRomanNumeral(symbol));
                 return true;
             }
             return false;

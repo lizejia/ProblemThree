@@ -8,7 +8,7 @@ namespace ProblemThree
 {
     public class MessageMain
     {
-        public GoodsSymbolMapper _goodsNameSymbol;
+        private readonly GoodsSymbolMapper _goodsNameSymbol;
         private readonly List<ICondition> _iconditionList;
         private readonly List<string> _outputList;
         public MessageMain()

@@ -24,14 +24,23 @@ namespace ProblemThree
                 var metals = reg.Groups[1].Value;
                 var metalCollection = Regex.Matches(metals, @"(\w+)");
                 List<SymbolValue> symbolValues = new List<SymbolValue>();
+                decimal creditsPrice = 1M;
                 for (int i = 0; i < metalCollection.Count; i++)
                 {
-                    symbolValues.Add(_goodsNameSymbol.Get()[metalCollection[i].Value]);
+                    if (_goodsNameSymbol.GetGoods().Any(a => a.Key == metalCollection[i].Value))
+                    {
+                        symbolValues.Add(_goodsNameSymbol.GetGoods()[metalCollection[i].Value]);
+                    }
+                    else
+                    {
+                        creditsPrice = _goodsNameSymbol.GetAnonymous()[metalCollection[i].Value];
+                    }
                 }
-                CheckCalculate sm = new CheckCalculate(symbolValues);
+                RuleMain sm = new RuleMain(symbolValues);
                 if (sm.Check())
                 {
-                    var total = sm.CalculatePrice();
+                    CalculateMain calculateMain = new CalculateMain(new CreditsCalculate(symbolValues));
+                    var total = calculateMain.ExecuteStrategy(creditsPrice);
                     this._outputList.Add($"{metals} is {total.ToString("#.##")} Credits");
                     return true;
                 }

@@ -58,7 +58,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckCalculate.cs" />
+    <Compile Include="Calculate\CalculateMain.cs" />
+    <Compile Include="Calculate\CalculateStrategy.cs" />
+    <Compile Include="Calculate\CreditsCalculate.cs" />
+    <Compile Include="Calculate\NormalRomanCalculate.cs" />
+    <Compile Include="Rules\RuleMain.cs" />
     <Compile Include="Condition\CreditsQuestion.cs" />
     <Compile Include="Condition\DefineCalculate.cs" />
     <Compile Include="Condition\DefineFirst.cs" />

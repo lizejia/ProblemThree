@@ -26,12 +26,13 @@ namespace ProblemThree
                 List<SymbolValue> symbolValues = new List<SymbolValue>();
                 for (int i = 0; i < metalCollection.Count; i++)
                 {
-                    symbolValues.Add(this._goodsNameSymbol.Get()[metalCollection[i].Value]);
+                    symbolValues.Add(this._goodsNameSymbol.GetGoods()[metalCollection[i].Value]);
                 }
-                CheckCalculate sm = new CheckCalculate(symbolValues);
+                RuleMain sm = new RuleMain(symbolValues);
                 if (sm.Check())
                 {
-                    var total = sm.CalculatePrice();
+                    CalculateMain calculateMain = new CalculateMain(new NormalRomanCalculate(symbolValues));
+                    var total = calculateMain.ExecuteStrategy(1);
                     this._outputList.Add($"{metals} is {total}");
                     return true;
                 }

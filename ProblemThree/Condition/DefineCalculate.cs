@@ -25,21 +25,22 @@ namespace ProblemThree
                 string calculateGoods = "";
                 for (int i = 0; i < metalCollection.Count; i++)
                 {
-                    if (_goodsNameSymbol.Get().Any(a => a.Key == metalCollection[i].Value))
+                    if (_goodsNameSymbol.GetGoods().Any(a => a.Key == metalCollection[i].Value))
                     {
-                        symbolValues.Add(_goodsNameSymbol.Get()[metalCollection[i].Value]);
+                        symbolValues.Add(_goodsNameSymbol.GetGoods()[metalCollection[i].Value]);
                     }
                     else
                     {
                         calculateGoods = metalCollection[i].Value;
                     }                    
                 }
-                CheckCalculate sm = new CheckCalculate(symbolValues);
+                RuleMain sm = new RuleMain(symbolValues);
                 if (sm.Check())
                 {
-                    var total = sm.CalculatePrice();
+                    CalculateMain calculateMain = new CalculateMain(new NormalRomanCalculate(symbolValues));
+                    var total = calculateMain.ExecuteStrategy(1);
                     var price = decimal.Parse(reg.Groups[2].Value) / total;
-                    _goodsNameSymbol.Add(calculateGoods, "U", price);//U代表未知
+                    _goodsNameSymbol.AddAnonymous(calculateGoods, price);//U代表未知
                     return true;
                 }
                 return false;

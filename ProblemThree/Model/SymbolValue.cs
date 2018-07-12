@@ -15,12 +15,24 @@ namespace ProblemThree
     public class GoodsSymbolMapper
     {
         private Dictionary<string, SymbolValue> _goodsSymbolDic;
+        private Dictionary<string, decimal> _anonymousSymbolDic;
         public GoodsSymbolMapper()
         {
             _goodsSymbolDic = new Dictionary<string, SymbolValue>();
+            _anonymousSymbolDic = new Dictionary<string, decimal>();
         }
 
-        public void Add(string name, string symbolStr, decimal value)
+        public void AddAnonymous(string name, decimal value)
+        {
+            _anonymousSymbolDic.Add(name, value);
+        }
+
+        public Dictionary<string, decimal> GetAnonymous()
+        {
+            return _anonymousSymbolDic;
+        }
+
+        public void AddGoods(string name, string symbolStr, decimal value)
         {
             _goodsSymbolDic.Add(name, new SymbolValue
             {
@@ -29,7 +41,7 @@ namespace ProblemThree
             });
         }
 
-        public Dictionary<string, SymbolValue> Get()
+        public Dictionary<string, SymbolValue> GetGoods()
         {
             return _goodsSymbolDic;
         }

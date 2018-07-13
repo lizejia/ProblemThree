@@ -13,11 +13,11 @@ namespace ProblemThree
         public CalculateStrategy(List<SymbolValue> calculateSymbolList)
         {
             this._calculateSymbolList = calculateSymbolList;
-            this.normalPrice = NormalCalculate();
+            this.normalPrice = this.BaseCalculate();
         }
         public abstract decimal CalculatePrice(decimal money);
 
-        private decimal NormalCalculate()
+        private decimal BaseCalculate()
         {
             decimal total = 0M;
             for (int i = 0; i < this._calculateSymbolList.Count; i++)

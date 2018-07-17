@@ -10,12 +10,12 @@ namespace ProblemThree
     {
         private readonly List<SymbolValue> _calculateSymbolList;
         private readonly decimal normalPrice;
-        public CalculateStrategy(List<SymbolValue> calculateSymbolList)
+        public CalculateStrategy(string romanStr)
         {
-            this._calculateSymbolList = calculateSymbolList;
+            this._calculateSymbolList = Tool.MapToSymbolValue(romanStr);
             this.normalPrice = NormalCalculate();
         }
-        public abstract decimal CalculatePrice(decimal money);
+        public abstract decimal CalculatePrice();
 
         private decimal NormalCalculate()
         {
@@ -35,6 +35,7 @@ namespace ProblemThree
             }
             return total;
         }
+        
         public decimal GetNormalPrice()
         {
             return normalPrice;

@@ -10,9 +10,9 @@ namespace ProblemThree
 {
     public class Tool
     {
-        public static RomanNumerals ToRomanNumeral(string goodsName)
+        public static RomanNumbers ToRomanNumeral(string goodsName)
         {
-            RomanNumerals res;
+            RomanNumbers res;
             Enum.TryParse(goodsName, out res);
             return res;
         }
@@ -27,38 +27,17 @@ namespace ProblemThree
             }
             return symbolValues;
         }
-
-        public static List<SymbolValue> MapToSymbolValue(List<char> symbols)
-        {
-            var symbolValues = new List<SymbolValue>();
-            foreach (var item in symbols)
-            {
-                var provStr = item.ToString();
-                symbolValues.Add(new SymbolValue() { Symbol = item, Value = (decimal)ToRomanNumeral(provStr) });
-            }
-            return symbolValues;
-        }
+        
         public static string ReadTxtContent()
         {
             string path = ConfigurationManager.AppSettings["InputPath"];
+            string result = "";
             using (FileStream fileStream = new FileStream(path, FileMode.Open))
             {
                 StreamReader streamReader = new StreamReader(fileStream);
-                string result = streamReader.ReadToEnd();
-                streamReader.Close();
-                return result;
+                result = streamReader.ReadToEnd();
             }
-        }
-
-        public static void WirteOutput(string output)
-        {
-            string path = ConfigurationManager.AppSettings["OutputPath"];
-            using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate))
-            {
-                StreamWriter streamWriter = new StreamWriter(fileStream);
-                streamWriter.WriteLineAsync(output);
-                streamWriter.Close();
-            }
+            return result;
         }
     }
 }

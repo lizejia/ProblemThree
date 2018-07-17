@@ -9,10 +9,10 @@ namespace ProblemThree
 {
     public class DefineFirst : ICondition
     {
-        private readonly GoodsSymbolMapper _goodsNameSymbol;
-        public DefineFirst(GoodsSymbolMapper goodsNameSymbol)
+        private readonly Mapper _mapper;
+        public DefineFirst(Mapper mapper)
         {
-            this._goodsNameSymbol = goodsNameSymbol;
+            this._mapper = mapper;
         }        
 
         public bool GetSymbolValuesByMessage(string message)
@@ -22,7 +22,7 @@ namespace ProblemThree
             {
                 string symbol = reg.Groups[2].Value;
                 //添加直接定义值
-                _goodsNameSymbol.AddGoods(reg.Groups[1].Value, symbol, (decimal)Tool.ToRomanNumeral(symbol));
+                _mapper.AddGalaxyNumbers(reg.Groups[1].Value, Tool.ToRomanNumeral(symbol));
                 return true;
             }
             return false;

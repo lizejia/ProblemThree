@@ -8,18 +8,18 @@ namespace ProblemThree
 {
     public class MessageMain
     {
-        private readonly GoodsSymbolMapper _goodsNameSymbol;
+        private readonly Mapper _mapper;
         private readonly List<ICondition> _iconditionList;
         private readonly List<string> _outputList;
         public MessageMain()
         {
-            _goodsNameSymbol = new GoodsSymbolMapper();
+            _mapper = new Mapper();
             _outputList = new List<string>();
             _iconditionList = new List<ICondition> {
-                                        new DefineFirst(_goodsNameSymbol),
-                                        new DefineCalculate(_goodsNameSymbol),
-                                        new MuchQuestion(_goodsNameSymbol,_outputList),
-                                        new CreditsQuestion(_goodsNameSymbol,_outputList)
+                                        new DefineFirst(_mapper),
+                                        new DefineCalculate(_mapper),
+                                        new MuchQuestion(_mapper,_outputList),
+                                        new CreditsQuestion(_mapper,_outputList)
                                      };
         }
 

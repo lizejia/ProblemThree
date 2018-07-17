@@ -15,9 +15,9 @@ namespace ProblemThree
         }
 
 
-        public decimal ExecuteStrategy(decimal money)
+        public decimal ExecuteStrategy()
         {
-            return _calculateStrategy.CalculatePrice(money);
+            return _calculateStrategy.CalculatePrice();
         }
 
     }

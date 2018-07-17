@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProblemThree
 {
-    public enum RomanNumerals
+    public enum RomanNumbers
     {
         I = 1,
         V = 5,

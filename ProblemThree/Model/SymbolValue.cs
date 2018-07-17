@@ -12,38 +12,34 @@ namespace ProblemThree
         public decimal Value { get; set; }
     }
 
-    public class GoodsSymbolMapper
+    public class Mapper
     {
-        private Dictionary<string, SymbolValue> _goodsSymbolDic;
-        private Dictionary<string, decimal> _anonymousSymbolDic;
-        public GoodsSymbolMapper()
+        private Dictionary<string, RomanNumbers> _galaxyNumbersDic;
+        private Dictionary<string, decimal> _unitNumbersDic;
+        public Mapper()
         {
-            _goodsSymbolDic = new Dictionary<string, SymbolValue>();
-            _anonymousSymbolDic = new Dictionary<string, decimal>();
+            _galaxyNumbersDic = new Dictionary<string, RomanNumbers>();
+            _unitNumbersDic = new Dictionary<string, decimal>();
         }
 
-        public void AddAnonymous(string name, decimal value)
+        public void AddUnit(string name, decimal value)
         {
-            _anonymousSymbolDic.Add(name, value);
+            _unitNumbersDic.Add(name, value);
         }
 
-        public Dictionary<string, decimal> GetAnonymous()
+        public Dictionary<string, decimal> GetUnitPriceMapper()
         {
-            return _anonymousSymbolDic;
+            return _unitNumbersDic;
         }
 
-        public void AddGoods(string name, string symbolStr, decimal value)
+        public void AddGalaxyNumbers(string name, RomanNumbers romanNumeral)
         {
-            _goodsSymbolDic.Add(name, new SymbolValue
-            {
-                Symbol = Convert.ToChar(symbolStr),
-                Value = value
-            });
+            _galaxyNumbersDic.Add(name, romanNumeral);
         }
 
-        public Dictionary<string, SymbolValue> GetGoods()
+        public Dictionary<string, RomanNumbers> GetGalaxyNumbersMapper()
         {
-            return _goodsSymbolDic;
+            return _galaxyNumbersDic;
         }
     }
 }

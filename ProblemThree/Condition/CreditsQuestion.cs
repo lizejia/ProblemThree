@@ -9,11 +9,11 @@ namespace ProblemThree
 {
     public class CreditsQuestion : ICondition
     {
-        private readonly GoodsSymbolMapper _goodsNameSymbol;
+        private readonly Mapper _mapper;
         private readonly List<string> _outputList;
-        public CreditsQuestion(GoodsSymbolMapper goodsNameSymbol, List<string> outputList)
+        public CreditsQuestion(Mapper mapper, List<string> outputList)
         {
-            this._goodsNameSymbol = goodsNameSymbol;
+            this._mapper = mapper;
             this._outputList = outputList;
         }
         public bool GetSymbolValuesByMessage(string message)
@@ -23,28 +23,26 @@ namespace ProblemThree
             {
                 var metals = reg.Groups[1].Value;
                 var metalCollection = Regex.Matches(metals, @"(\w+)");
-                List<SymbolValue> symbolValues = new List<SymbolValue>();
-                decimal creditsPrice = 1M;
+                GalaxyCalculate galaxyCalculate = new GalaxyCalculate
+                {
+                    GalaxyNumberMapper = this._mapper.GetGalaxyNumbersMapper(),
+                    GalaxyUnitMapper = this._mapper.GetUnitPriceMapper()
+                };
                 for (int i = 0; i < metalCollection.Count; i++)
                 {
-                    if (_goodsNameSymbol.GetGoods().Any(a => a.Key == metalCollection[i].Value))
+                    if (galaxyCalculate.GalaxyNumberMapper.Any(a => a.Key == metalCollection[i].Value))
                     {
-                        symbolValues.Add(_goodsNameSymbol.GetGoods()[metalCollection[i].Value]);
+                        galaxyCalculate.GalaxyNumber.Add(metalCollection[i].Value);
                     }
                     else
                     {
-                        creditsPrice = _goodsNameSymbol.GetAnonymous()[metalCollection[i].Value];
+                        galaxyCalculate.Unit = metalCollection[i].Value;
                     }
                 }
-                RuleMain sm = new RuleMain(symbolValues);
-                if (sm.Check())
-                {
-                    CalculateMain calculateMain = new CalculateMain(new CreditsCalculate(symbolValues));
-                    var total = calculateMain.ExecuteStrategy(creditsPrice);
-                    this._outputList.Add($"{metals} is {total.ToString("#.##")} Credits");
-                    return true;
-                }
-                return false;
+
+                var result = galaxyCalculate.Calculate();
+                this._outputList.Add($"{metals} is {result.ToString("#.##")} Credits");
+                return true;
             }
             return false;
         }

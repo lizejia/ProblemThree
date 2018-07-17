@@ -12,9 +12,9 @@ namespace ProblemThree
         private readonly List<char> repeatList = new List<char> { 'I', 'X', 'C', 'M' };
         private readonly List<char> _checkSymbolList;
 
-        public RepeatCheck(List<char> checkSymbolList)
+        public RepeatCheck(string romanStr)
         {
-            this._checkSymbolList = checkSymbolList;
+            this._checkSymbolList = romanStr.ToList();
         }        
 
         public bool Check()

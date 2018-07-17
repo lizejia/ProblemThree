@@ -11,9 +11,9 @@ namespace ProblemThree
         private readonly List<string> _subtractList = new List<string> { "IV", "IX", "XL", "XC", "CD", "CM" };
         private readonly List<SymbolValue> _checkSymbolList;
         
-        public SubtractCheck(List<SymbolValue> checkSymbolList)
+        public SubtractCheck(string romanStr)
         {
-            _checkSymbolList = checkSymbolList;
+            _checkSymbolList = Tool.MapToSymbolValue(romanStr);
         }
         public bool Check()
         {
@@ -29,6 +29,7 @@ namespace ProblemThree
                 }
             }
             return true;
-        }        
+        }
+        
     }
 }

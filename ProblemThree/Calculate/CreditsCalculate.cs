@@ -11,12 +11,14 @@ namespace ProblemThree
     /// </summary>
     public class CreditsCalculate : CalculateStrategy
     {
-        public CreditsCalculate(List<SymbolValue> calculateSymbolList) : base(calculateSymbolList)
+        private readonly decimal _unitPrice;
+        public CreditsCalculate(string romanStr,decimal unitPrice) : base(romanStr)
         {
+            this._unitPrice = unitPrice;
         }
-        public override decimal CalculatePrice(decimal money)
+        public override decimal CalculatePrice()
         {
-            return base.GetNormalPrice() * money;
+            return base.GetNormalPrice() * this._unitPrice;
         }
     }
 }

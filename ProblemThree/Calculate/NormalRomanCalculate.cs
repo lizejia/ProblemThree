@@ -11,10 +11,10 @@ namespace ProblemThree
     /// </summary>
     public class NormalRomanCalculate : CalculateStrategy
     {
-        public NormalRomanCalculate(List<SymbolValue> calculateSymbolList):base(calculateSymbolList)
+        public NormalRomanCalculate(string romanStr) : base(romanStr)
         {
         }
-        public override decimal CalculatePrice(decimal money)
+        public override decimal CalculatePrice()
         {
             return base.GetNormalPrice();
         }

@@ -9,20 +9,16 @@ namespace ProblemThree
     public class RuleMain
     {
         private readonly List<IRule> _iruleList;
-        private readonly List<SymbolValue> _checkSymbolList;
-        private readonly List<char> _symbolList;
-        public RuleMain(List<SymbolValue> symbolValueList)
+        public RuleMain(string romanStr)
         {
-            _symbolList = symbolValueList.Select(s => s.Symbol).ToList();
-            this._checkSymbolList = Tool.MapToSymbolValue(_symbolList);
             this._iruleList = new List<IRule> {
-                                        new RepeatCheck(this._symbolList),
-                                        new SubtractCheck(this._checkSymbolList)
+                                        new RepeatCheck(romanStr),
+                                        new SubtractCheck(romanStr)
                                      };
         }
         
         public bool Check()
-        {            
+        {
             return !_iruleList.Exists(f => !f.Check());
         }
     }

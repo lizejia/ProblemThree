@@ -9,11 +9,11 @@ namespace ProblemThree
 {
     public class MuchQuestion : ICondition
     {
-        private readonly GoodsSymbolMapper _goodsNameSymbol;
+        private readonly Mapper _mapper;
         private readonly List<string> _outputList;
-        public MuchQuestion(GoodsSymbolMapper goodsNameSymbol,List<string> outputList)
+        public MuchQuestion(Mapper mapper,List<string> outputList)
         {
-            this._goodsNameSymbol = goodsNameSymbol;
+            this._mapper = mapper;
             this._outputList = outputList;
         }
         public bool GetSymbolValuesByMessage(string message)
@@ -22,21 +22,18 @@ namespace ProblemThree
             if (reg.Success)
             {
                 var metals = reg.Groups[1].Value;
-                var metalCollection = Regex.Matches(metals, @"(\w+)");
-                List<SymbolValue> symbolValues = new List<SymbolValue>();
-                for (int i = 0; i < metalCollection.Count; i++)
+                var GalaxyNumbers = Regex.Matches(metals, @"(\w+)");
+                GalaxyCalculate galaxyCalculate = new GalaxyCalculate
                 {
-                    symbolValues.Add(this._goodsNameSymbol.GetGoods()[metalCollection[i].Value]);
-                }
-                RuleMain sm = new RuleMain(symbolValues);
-                if (sm.Check())
+                    GalaxyNumberMapper = this._mapper.GetGalaxyNumbersMapper()
+                };
+                for (int i = 0; i < GalaxyNumbers.Count; i++)
                 {
-                    CalculateMain calculateMain = new CalculateMain(new NormalRomanCalculate(symbolValues));
-                    var total = calculateMain.ExecuteStrategy(1);
-                    this._outputList.Add($"{metals} is {total}");
-                    return true;
+                    galaxyCalculate.GalaxyNumber.Add(GalaxyNumbers[i].Value);
                 }
-                return false;
+                var result = galaxyCalculate.Calculate();
+                this._outputList.Add($"{metals} is {result}");
+                return true;
             }
             return false;
         }

@@ -9,10 +9,10 @@ namespace ProblemThree
 {
     public class DefineCalculate : ICondition
     {
-        private readonly GoodsSymbolMapper _goodsNameSymbol;
-        public DefineCalculate(GoodsSymbolMapper goodsNameSymbol)
+        private readonly Mapper _mapper;
+        public DefineCalculate(Mapper mapper)
         {
-            this._goodsNameSymbol = goodsNameSymbol;
+            this._mapper = mapper;
         }
         public bool GetSymbolValuesByMessage(string message)
         {
@@ -21,29 +21,26 @@ namespace ProblemThree
             {                
                 var metals = reg.Groups[1].Value;
                 var metalCollection = Regex.Matches(metals, @"(\w+)");
-                List<SymbolValue> symbolValues = new List<SymbolValue>();
-                string calculateGoods = "";
+                GalaxyCalculate galaxyCalculate = new GalaxyCalculate
+                {
+                    GalaxyNumberMapper = this._mapper.GetGalaxyNumbersMapper()
+                };
+                string unitStr = "";
                 for (int i = 0; i < metalCollection.Count; i++)
                 {
-                    if (_goodsNameSymbol.GetGoods().Any(a => a.Key == metalCollection[i].Value))
+                    if (galaxyCalculate.GalaxyNumberMapper.Any(a => a.Key == metalCollection[i].Value))
                     {
-                        symbolValues.Add(_goodsNameSymbol.GetGoods()[metalCollection[i].Value]);
+                        galaxyCalculate.GalaxyNumber.Add(metalCollection[i].Value);
                     }
                     else
                     {
-                        calculateGoods = metalCollection[i].Value;
+                        unitStr = metalCollection[i].Value;
                     }                    
                 }
-                RuleMain sm = new RuleMain(symbolValues);
-                if (sm.Check())
-                {
-                    CalculateMain calculateMain = new CalculateMain(new NormalRomanCalculate(symbolValues));
-                    var total = calculateMain.ExecuteStrategy(1);
-                    var price = decimal.Parse(reg.Groups[2].Value) / total;
-                    _goodsNameSymbol.AddAnonymous(calculateGoods, price);//U代表未知
-                    return true;
-                }
-                return false;
+                var result = galaxyCalculate.Calculate();
+                var unitPrice = decimal.Parse(reg.Groups[2].Value) / result;
+                this._mapper.AddUnit(unitStr, unitPrice);
+                return true;
             }
             return false;
         }

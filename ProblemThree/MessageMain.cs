@@ -19,7 +19,8 @@ namespace ProblemThree
                                         new DefineFirst(_mapper),
                                         new DefineCalculate(_mapper),
                                         new MuchQuestion(_mapper,_outputList),
-                                        new CreditsQuestion(_mapper,_outputList)
+                                        new CreditsQuestion(_mapper,_outputList),
+                                        new ManyQuestion(_mapper,_outputList)
                                      };
         }
 

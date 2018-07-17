@@ -12,7 +12,7 @@ namespace ProblemThree
     public class CreditsCalculate : CalculateStrategy
     {
         private readonly decimal _unitPrice;
-        public CreditsCalculate(string romanStr,decimal unitPrice) : base(romanStr)
+        public CreditsCalculate(string romanStr, decimal unitPrice) : base(romanStr)
         {
             this._unitPrice = unitPrice;
         }

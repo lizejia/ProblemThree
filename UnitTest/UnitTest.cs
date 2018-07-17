@@ -142,5 +142,23 @@ glob prok Iron is 782 Credits
 I have no idea what you are talking about";
             Assert.AreEqual(answer, output);
         }
+        [TestMethod]
+        public void TestHowManyEx()
+        {
+            string input = @"glob is I
+prok is V
+pish is X
+tegj is L
+glob glob Silver is 34 Credits
+glob prok Gold is 57800 Credits
+pish pish Iron is 3910 Credits
+how much wood could a woodchuck chuck if a woodchuck could chuck wood ?
+how many Silver is glob Gold ?";
+            MessageMain messageMain = new MessageMain();
+            var output = messageMain.Start(input);
+            string answer = @"I have no idea what you are talking about
+glob Gold is 850 Silver";
+            Assert.AreEqual(answer, output);
+        }
     }
 }

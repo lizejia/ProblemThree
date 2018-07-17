@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProblemThree.Calculate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace ProblemThree
         public Dictionary<string, RomanNumbers> GalaxyNumberMapper { get; set; }
 
         public string Unit { get; set; }
+
+        public string ManyUnit { get; set; }
 
         public Dictionary<string, decimal> GalaxyUnitMapper { get; set; }
 
@@ -36,6 +39,8 @@ namespace ProblemThree
                 CalculateMain calculateMain = null;
                 if (string.IsNullOrEmpty(Unit))
                     calculateMain = new CalculateMain(new NormalRomanCalculate(romanStr));
+                else if (!string.IsNullOrEmpty(Unit) && !string.IsNullOrEmpty(ManyUnit))
+                    calculateMain = new CalculateMain(new UnitCalculate(romanStr, GalaxyUnitMapper[Unit], GalaxyUnitMapper[ManyUnit]));
                 else
                     calculateMain = new CalculateMain(new CreditsCalculate(romanStr, GalaxyUnitMapper[Unit]));
 

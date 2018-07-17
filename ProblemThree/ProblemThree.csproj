@@ -62,6 +62,8 @@
     <Compile Include="Calculate\CalculateStrategy.cs" />
     <Compile Include="Calculate\CreditsCalculate.cs" />
     <Compile Include="Calculate\NormalRomanCalculate.cs" />
+    <Compile Include="Calculate\UnitCalculate.cs" />
+    <Compile Include="Condition\ManyQuestion.cs" />
     <Compile Include="GalaxyCalculate.cs" />
     <Compile Include="Rules\RuleMain.cs" />
     <Compile Include="Condition\CreditsQuestion.cs" />

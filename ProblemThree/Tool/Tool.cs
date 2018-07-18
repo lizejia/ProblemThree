@@ -12,8 +12,7 @@ namespace ProblemThree
     {
         public static RomanNumbers ToRomanNumeral(string goodsName)
         {
-            RomanNumbers res;
-            Enum.TryParse(goodsName, out res);
+            Enum.TryParse(goodsName, out RomanNumbers res);
             return res;
         }
 

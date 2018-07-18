@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProblemThree
+namespace ProblemThree.Calculate
 {
     /// <summary>
     /// 被定义有罗马数字的货物计算价格

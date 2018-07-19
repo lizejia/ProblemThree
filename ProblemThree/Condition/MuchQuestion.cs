@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ProblemThree.Model;
 
 namespace ProblemThree.Condition
 {
-    public class MuchQuestion : ICondition
+    public class MuchQuestion : IGalaxyMessage
     {
         private readonly Mapper _mapper;
         private readonly List<string> _outputList;
@@ -16,23 +17,21 @@ namespace ProblemThree.Condition
             this._mapper = mapper;
             this._outputList = outputList;
         }
-        public bool GetSymbolValuesByMessage(string message)
+        public bool GetGalaxyNumber(string message)
         {
+            //how much is pish tegj glob glob ?
             var reg = Regex.Match(message, @"^how much is ([\w+\s]+) [\\?]$");
             if (reg.Success)
             {
-                var metals = reg.Groups[1].Value;
-                var GalaxyNumbers = Regex.Matches(metals, @"(\w+)");
+                var galaxyNumberStr = reg.Groups[1].Value;
+                var galaxyNumberArr = galaxyNumberStr.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                 GalaxyCalculate galaxyCalculate = new GalaxyCalculate
                 {
-                    GalaxyNumberMapper = this._mapper.GetGalaxyNumbersMapper()
+                    GalaxyNumberMapper = this._mapper.GetGalaxyNumbersMapper(),
+                    GalaxyNumber = galaxyNumberArr.ToList()
                 };
-                for (int i = 0; i < GalaxyNumbers.Count; i++)
-                {
-                    galaxyCalculate.GalaxyNumber.Add(GalaxyNumbers[i].Value);
-                }
-                var result = galaxyCalculate.Calculate();
-                this._outputList.Add($"{metals} is {result}");
+                galaxyCalculate.Calculate();
+                this._outputList.Add($"{galaxyNumberStr} is {galaxyCalculate.GalaxyNumberPrice}");
                 return true;
             }
             return false;

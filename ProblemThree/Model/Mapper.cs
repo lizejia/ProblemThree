@@ -4,14 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProblemThree
+namespace ProblemThree.Model
 {
-    public class SymbolValue
-    {
-        public char Symbol { get; set; }
-        public decimal Value { get; set; }
-    }
-
     public class Mapper
     {
         private Dictionary<string, RomanNumbers> _galaxyNumbersDic;

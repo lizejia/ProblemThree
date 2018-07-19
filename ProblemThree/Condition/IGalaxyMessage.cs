@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProblemThree.Condition
 {
-    interface ICondition
+    interface IGalaxyMessage
     {
-        bool GetSymbolValuesByMessage(string message);
+        bool GetGalaxyNumber(string message);
     }
 }

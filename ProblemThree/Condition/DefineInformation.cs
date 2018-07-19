@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProblemThree.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace ProblemThree.Condition
 {
-    public class DefineFirst : ICondition
+    public class DefineInformation : IGalaxyMessage
     {
         private readonly Mapper _mapper;
-        public DefineFirst(Mapper mapper)
+        public DefineInformation(Mapper mapper)
         {
             this._mapper = mapper;
-        }        
+        }
 
-        public bool GetSymbolValuesByMessage(string message)
+        public bool GetGalaxyNumber(string message)
         {
             var reg = Regex.Match(message, @"(^\w+) is ([IVXLCDM])$");
             if (reg.Success)
@@ -27,5 +28,6 @@ namespace ProblemThree.Condition
             }
             return false;
         }
+        
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProblemThree
+namespace ProblemThree.Model
 {
     public enum RomanNumbers
     {
@@ -15,5 +15,12 @@ namespace ProblemThree
         C = 100,
         D = 500,
         M = 1000
+    }
+
+    public enum CalculateState
+    {
+        Credits,
+        HowMuch,
+        HowManyCredits
     }
 }

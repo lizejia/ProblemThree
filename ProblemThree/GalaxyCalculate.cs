@@ -1,4 +1,4 @@
-﻿using ProblemThree.Calculate;
+﻿using ProblemThree.Model;
 using ProblemThree.Rules;
 using System;
 using System.Collections.Generic;
@@ -12,10 +12,11 @@ namespace ProblemThree
     {
         public List<string> GalaxyNumber { get; set; }
         public Dictionary<string, RomanNumbers> GalaxyNumberMapper { get; set; }
+        public decimal GalaxyNumberPrice { get; set; } = 0M;
 
         public string Unit { get; set; }
 
-        public string ManyUnit { get; set; }
+        public decimal CreditsPrice { get; set; }
 
         public Dictionary<string, decimal> GalaxyUnitMapper { get; set; }
 
@@ -26,7 +27,7 @@ namespace ProblemThree
             GalaxyUnitMapper = new Dictionary<string, decimal>();
         }
 
-        public decimal Calculate()
+        public void Calculate()
         {
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var item in GalaxyNumber)
@@ -37,17 +38,34 @@ namespace ProblemThree
             RuleMain ruleMain = new RuleMain(romanStr);
             if (ruleMain.Check())
             {
-                CalculateMain calculateMain = null;
+                var _calculateSymbolList = romanStr.ToList();
+                for (int i = 0; i < _calculateSymbolList.Count; i++)
+                {
+                    int nextIndex = i + 1;
+                    var currentPrice = (decimal)Tool.ToRomanNumeral(_calculateSymbolList[i].ToString());
+                    var nextPrice = nextIndex < _calculateSymbolList.Count ? (decimal)Tool.ToRomanNumeral(_calculateSymbolList[nextIndex].ToString()) : 0M;
+                    if (currentPrice < nextPrice)
+                    {
+                        GalaxyNumberPrice += nextPrice - currentPrice;
+                        i++;
+                    }
+                    else
+                    {
+                        GalaxyNumberPrice += currentPrice;
+                    }
+                }
                 if (string.IsNullOrEmpty(Unit))
-                    calculateMain = new CalculateMain(new NormalRomanCalculate(romanStr));
-                else if (!string.IsNullOrEmpty(Unit) && !string.IsNullOrEmpty(ManyUnit))
-                    calculateMain = new CalculateMain(new UnitCalculate(romanStr, GalaxyUnitMapper[Unit], GalaxyUnitMapper[ManyUnit]));
+                    return;
+                //GalaxyUnitMapper[Unit] * GalaxyNumberPrice = CreditsPrice;
+                if (!GalaxyUnitMapper.Any())
+                {
+                    GalaxyUnitMapper.Add(Unit, CreditsPrice / GalaxyNumberPrice);
+                }
                 else
-                    calculateMain = new CalculateMain(new CreditsCalculate(romanStr, GalaxyUnitMapper[Unit]));
-
-                return calculateMain.ExecuteStrategy();
+                {
+                    CreditsPrice = GalaxyUnitMapper[Unit] * GalaxyNumberPrice;
+                }
             }
-            return 0;
         }
     }
 }

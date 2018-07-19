@@ -4,44 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ProblemThree.Model;
 
 namespace ProblemThree.Condition
 {
-    public class CreditsQuestion : ICondition
+    public class ManyCreditsQuestion : IGalaxyMessage
     {
         private readonly Mapper _mapper;
         private readonly List<string> _outputList;
-        public CreditsQuestion(Mapper mapper, List<string> outputList)
+        public ManyCreditsQuestion(Mapper mapper, List<string> outputList)
         {
             this._mapper = mapper;
             this._outputList = outputList;
         }
-        public bool GetSymbolValuesByMessage(string message)
+        public bool GetGalaxyNumber(string message)
         {
+            //how many Credits is glob prok Silver ?
             var reg = Regex.Match(message, @"^how many Credits is ([\w+\s]+) [\\?]$");
             if (reg.Success)
             {
-                var metals = reg.Groups[1].Value;
-                var metalCollection = Regex.Matches(metals, @"(\w+)");
+                var galaxyNumberUnitStr = reg.Groups[1].Value;
+                var galaxyNumberUnitArr = galaxyNumberUnitStr.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                 GalaxyCalculate galaxyCalculate = new GalaxyCalculate
                 {
                     GalaxyNumberMapper = this._mapper.GetGalaxyNumbersMapper(),
                     GalaxyUnitMapper = this._mapper.GetUnitPriceMapper()
                 };
-                for (int i = 0; i < metalCollection.Count; i++)
+                foreach (var item in galaxyNumberUnitArr)
                 {
-                    if (galaxyCalculate.GalaxyNumberMapper.Any(a => a.Key == metalCollection[i].Value))
+                    if (this._mapper.GetGalaxyNumbersMapper().Any(a => a.Key == item))
                     {
-                        galaxyCalculate.GalaxyNumber.Add(metalCollection[i].Value);
+                        galaxyCalculate.GalaxyNumber.Add(item);
                     }
                     else
                     {
-                        galaxyCalculate.Unit = metalCollection[i].Value;
+                        galaxyCalculate.Unit = item;
                     }
                 }
-
-                var result = galaxyCalculate.Calculate();
-                this._outputList.Add($"{metals} is {result.ToString("#.##")} Credits");
+                galaxyCalculate.Calculate();
+                this._outputList.Add($"{galaxyNumberUnitStr} is {galaxyCalculate.CreditsPrice.ToString("#.##")} Credits");
                 return true;
             }
             return false;

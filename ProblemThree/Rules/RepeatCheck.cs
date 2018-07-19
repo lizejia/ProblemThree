@@ -19,17 +19,20 @@ namespace ProblemThree.Rules
 
         public bool Check()
         {
-            int y = 0;
+            int repeatTime = 0;
             char current = _checkSymbolList.ElementAt(0);
             for (int i = 1; i < _checkSymbolList.Count; i++)
             {
-                if (current == _checkSymbolList.ElementAt(i) && neverRepeatList.Any(c => c == current))
+                var next = _checkSymbolList.ElementAt(i);
+                if (current != next)
+                    repeatTime = 0;
+                if (neverRepeatList.Any(c => c == current) && current == next)
+                    return false;                
+                if (repeatList.Any(c => c == current) && current == next)
+                    repeatTime++;
+                if (repeatTime > 3)
                     return false;
-                if (current == _checkSymbolList.ElementAt(i) && repeatList.Any(c => c == current))
-                    y++;
-                if (y >= 3)
-                    return false;
-                current = _checkSymbolList.ElementAt(i);
+                current = next;
             }
             return true;
         }

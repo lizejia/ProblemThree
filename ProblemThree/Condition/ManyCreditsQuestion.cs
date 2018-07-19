@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ProblemThree.Calculate;
 using ProblemThree.Model;
 
 namespace ProblemThree.Condition
@@ -25,7 +26,7 @@ namespace ProblemThree.Condition
             {
                 var galaxyNumberUnitStr = reg.Groups[1].Value;
                 var galaxyNumberUnitArr = galaxyNumberUnitStr.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                GalaxyCalculate galaxyCalculate = new GalaxyCalculate
+                ManyCreditsCalculate galaxyCalculate = new ManyCreditsCalculate
                 {
                     GalaxyNumberMapper = this._mapper.GetGalaxyNumbersMapper(),
                     GalaxyUnitMapper = this._mapper.GetUnitPriceMapper()

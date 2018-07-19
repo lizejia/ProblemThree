@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProblemThree.Calculate;
 using ProblemThree.Model;
 
 namespace ProblemThree.Condition
@@ -25,7 +26,7 @@ namespace ProblemThree.Condition
                 var manyUnitStr = messageSpilt[0].Replace("how many", "").Trim();
                 var galaxyUnitStr = messageSpilt[1].Replace("?", "").Trim();
                 var galaxyUnitArr = galaxyUnitStr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                GalaxyCalculate galaxyCalculate = new GalaxyCalculate
+                ManyCalculate galaxyCalculate = new ManyCalculate
                 {
                     GalaxyNumberMapper = _mapper.GetGalaxyNumbersMapper(),
                     GalaxyUnitMapper = _mapper.GetUnitPriceMapper(),
@@ -39,10 +40,11 @@ namespace ProblemThree.Condition
                     else
                     {
                         galaxyCalculate.Unit = item;
+                        galaxyCalculate.ManyUnit = manyUnitStr;
                     }
                 }
                 galaxyCalculate.Calculate();
-                this._outputList.Add($"{galaxyUnitStr} is {galaxyCalculate.CreditsPrice/galaxyCalculate.GalaxyUnitMapper[manyUnitStr]} {manyUnitStr}");
+                this._outputList.Add($"{galaxyUnitStr} is {galaxyCalculate.Multiple} {manyUnitStr}");
                 return true;
             }
             return false;

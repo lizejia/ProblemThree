@@ -1,4 +1,5 @@
-﻿using ProblemThree.Model;
+﻿using ProblemThree.Calculate;
+using ProblemThree.Model;
 using ProblemThree.Rules;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace ProblemThree.Condition
                 var creditPrice = decimal.Parse(reg.Groups[2].Value);
                 var galaxyNumberUnitStr = reg.Groups[1].Value;
                 var galaxyNumberUnitArr = galaxyNumberUnitStr.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                GalaxyCalculate galaxyCalculate = new GalaxyCalculate()
+                CreditsCalculate creditsCalculate = new CreditsCalculate()
                 {
                     GalaxyNumberMapper = this._mapper.GetGalaxyNumbersMapper(),
                     CreditsPrice = creditPrice
@@ -35,15 +36,15 @@ namespace ProblemThree.Condition
                 {
                     if (this._mapper.GetGalaxyNumbersMapper().Any(a => a.Key == item))
                     {
-                        galaxyCalculate.GalaxyNumber.Add(item);
+                        creditsCalculate.GalaxyNumber.Add(item);
                     }
                     else
                     {
-                        galaxyCalculate.Unit = item;
+                        creditsCalculate.Unit = item;
                     }
                 }
-                galaxyCalculate.Calculate();
-                this._mapper.AddUnit(galaxyCalculate.Unit, galaxyCalculate.GalaxyUnitMapper[galaxyCalculate.Unit]);
+                creditsCalculate.Calculate();
+                this._mapper.AddUnit(creditsCalculate.Unit, creditsCalculate.GalaxyUnitMapper[creditsCalculate.Unit]);
                 return true;
             }
             return false;

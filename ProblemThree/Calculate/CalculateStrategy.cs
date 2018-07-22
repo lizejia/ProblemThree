@@ -1,4 +1,5 @@
 ﻿using ProblemThree.Model;
+using ProblemThree.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,6 @@ namespace ProblemThree.Calculate
         public List<string> GalaxyNumber { get; set; }
         public Dictionary<string, RomanNumbers> GalaxyNumberMapper { get; set; }
         public decimal GalaxyNumberPrice { get; set; } = 0M;
-
         public CalculateStrategy()
         {
             GalaxyNumber = new List<string>();
@@ -28,23 +28,30 @@ namespace ProblemThree.Calculate
                 stringBuilder.Append(GalaxyNumberMapper[item].ToString());
             }
             string romanStr = stringBuilder.ToString();
-
-            var _calculateSymbolList = romanStr.ToList();
-            for (int i = 0; i < _calculateSymbolList.Count; i++)
+            RuleMain ruleMain = new RuleMain(romanStr);
+            if (ruleMain.Check())
             {
-                int nextIndex = i + 1;
-                var currentPrice = (decimal)Tool.ToRomanNumeral(_calculateSymbolList[i].ToString());
-                var nextPrice = nextIndex < _calculateSymbolList.Count ? (decimal)Tool.ToRomanNumeral(_calculateSymbolList[nextIndex].ToString()) : 0M;
-                if (currentPrice < nextPrice)
+                var _calculateSymbolList = romanStr.ToList();
+                for (int i = 0; i < _calculateSymbolList.Count; i++)
                 {
-                    GalaxyNumberPrice += nextPrice - currentPrice;
-                    i++;
-                }
-                else
-                {
-                    GalaxyNumberPrice += currentPrice;
+                    int nextIndex = i + 1;
+                    var currentPrice = (decimal)Tool.ToRomanNumeral(_calculateSymbolList[i].ToString());
+                    var nextPrice = nextIndex < _calculateSymbolList.Count ? (decimal)Tool.ToRomanNumeral(_calculateSymbolList[nextIndex].ToString()) : 0M;
+                    if (currentPrice < nextPrice)
+                    {
+                        GalaxyNumberPrice += nextPrice - currentPrice;
+                        i++;
+                    }
+                    else
+                    {
+                        GalaxyNumberPrice += currentPrice;
+                    }
                 }
             }
-        }        
+            else
+            {
+                throw new NotImplementedException("Check失败");
+            }
+        }
     }
 }
